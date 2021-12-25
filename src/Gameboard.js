@@ -3,16 +3,14 @@ import React, { useEffect } from 'react';
 
 import Card from './Card';
 
-function defaultRandomizer(deck) {
+function defaultOrder(deck) {
   return deck.map((value, index) => index);
 }
 
 function Gameboard(props) {
-  let { deck, randomizer } = props;
+  let { deck, order } = props;
   if (!deck) { deck = []; }
-  if (!randomizer) { randomizer = defaultRandomizer; }
-
-  const order = randomizer(deck);
+  if (!order) { order = defaultOrder; }
 
   return (
     <div className="Gameboard">
@@ -20,9 +18,6 @@ function Gameboard(props) {
       <ol style={{ listStyleType: 'none' }}>
         {
           deck.map((value, index) => {
-            if (index === 0) {
-              console.log('first item rank: ', order[index]);
-            }
             const rank = order[index];
             return (
               <li value={rank} key={value.id}>
