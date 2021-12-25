@@ -39,9 +39,9 @@ describe('Gameboard with cards', () => {
   });
 
   it('Cards are shuffled between clicks', () => {
-    const mockRandomizer = jest.fn((deck) => [2, 0, 1]);
+    const mockOrder = [2, 0, 1];
     expect(screen.getAllByRole('listitem')[0].value).toBe(0);
-    rerender(<Gameboard deck={deck} randomizer={mockRandomizer} />);
+    rerender(<Gameboard deck={deck} order={mockOrder} />);
     expect(screen.getAllByRole('listitem')[0].value).toBe(2);
   });
 
