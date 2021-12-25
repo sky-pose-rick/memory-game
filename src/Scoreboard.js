@@ -13,7 +13,6 @@ function Scoreboard(props) {
 
   return (
     <div className="Scoreboard">
-      scoreboard
       <p>
         {`High Score: ${highScore}`}
       </p>
