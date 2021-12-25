@@ -14,7 +14,6 @@ function Gameboard(props) {
 
   return (
     <div className="Gameboard">
-      gameboard
       <ol style={{ listStyleType: 'none' }}>
         {
           deck.map((value, index) => {

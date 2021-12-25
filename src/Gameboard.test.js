@@ -1,14 +1,15 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Gameboard from './Gameboard';
 
 it('Gameboard renders', () => {
   render(<Gameboard />);
-  expect(screen.getByText(/gameboard/)).toBeInTheDocument();
+  expect(screen.getByRole('list')).toBeInTheDocument();
 });
 
 describe('Gameboard with cards', () => {
+  const mockFn = jest.fn(() => {});
   let rerender;
   const deck = [{
     src: 'zebra.png',
@@ -27,7 +28,7 @@ describe('Gameboard with cards', () => {
     text: 'frog',
     alt: 'frog',
     id: 'card-3',
-    onClick: null,
+    onClick: mockFn,
   }];
 
   beforeEach(() => {
@@ -45,5 +46,8 @@ describe('Gameboard with cards', () => {
     expect(screen.getAllByRole('listitem')[0].value).toBe(2);
   });
 
-  it.todo('Cards can be clicked');
+  it('Cards can be clicked', () => {
+    fireEvent.click(screen.getByText(/frog/));
+    expect(mockFn.mock.calls.length).toBe(1);
+  });
 });
