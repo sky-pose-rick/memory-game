@@ -9,30 +9,28 @@ it('Gameboard renders', () => {
 });
 
 describe('Gameboard with cards', () => {
-  const mockFn = jest.fn(() => {});
+  const mockFirst = jest.fn(() => {});
+  const mockRepeat = jest.fn(() => {});
   let rerender;
   const deck = [{
     src: 'zebra.png',
     text: 'zebra',
     alt: 'zebra',
     id: 'card-1',
-    onClick: null,
   }, {
     src: 'bunny.png',
     text: 'bunny',
     alt: 'bunny',
     id: 'card-2',
-    onClick: null,
   }, {
     src: 'frog.png',
     text: 'frog',
     alt: 'frog',
     id: 'card-3',
-    onClick: mockFn,
   }];
 
   beforeEach(() => {
-    ({ rerender } = render(<Gameboard deck={deck} />));
+    ({ rerender } = render(<Gameboard deck={deck} onFirst={mockFirst} onRepeat={mockRepeat} />));
   });
 
   it('Cards display', () => {
@@ -48,6 +46,15 @@ describe('Gameboard with cards', () => {
 
   it('Cards can be clicked', () => {
     fireEvent.click(screen.getByText(/frog/));
-    expect(mockFn.mock.calls.length).toBe(1);
+    expect(mockFirst.mock.calls.length).toBe(1);
+  });
+
+  it('Functions reset on multiple clicks', () => {
+    const frogElem = screen.getByText(/frog/);
+    fireEvent.click(frogElem);
+    fireEvent.click(frogElem);
+    fireEvent.click(frogElem);
+    expect(mockFirst.mock.calls.length).toBe(2);
+    expect(mockRepeat.mock.calls.length).toBe(1);
   });
 });

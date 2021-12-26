@@ -18,7 +18,7 @@ it('Has a gameboard', () => {
   expect(screen.getByRole('list')).toBeInTheDocument();
 });
 
-/* describe('Uses a deck', () => {
+describe('Uses a deck', () => {
   const deck = [{
     src: 'zebra.png',
     text: 'zebra',
@@ -36,9 +36,7 @@ it('Has a gameboard', () => {
   it('Game Works', () => {
     render(<App data={deck} demo />);
     const cards = screen.getAllByRole('button');
-    expect(screen.getByText(/Current Score: 0/)).toBeInTheDocument();
     fireEvent.click(cards[0]);
-    expect(screen.getByText(/Current Score: 1/)).toBeInTheDocument();
     fireEvent.click(cards[1]);
     expect(screen.getByText(/Current Score: 2/)).toBeInTheDocument();
     // repeated card, game over
@@ -46,4 +44,4 @@ it('Has a gameboard', () => {
     expect(screen.getByText(/High Score: 2/)).toBeInTheDocument();
     expect(screen.getByText(/Current Score: 0/)).toBeInTheDocument();
   });
-}); */
+});
