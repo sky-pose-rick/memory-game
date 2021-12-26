@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import Card from './Card';
 
@@ -10,7 +10,7 @@ function defaultOrder(deck) {
 function Gameboard(props) {
   let { deck, order } = props;
   if (!deck) { deck = []; }
-  if (!order) { order = defaultOrder; }
+  if (!order) { order = defaultOrder(deck); }
 
   return (
     <div className="Gameboard">

@@ -34,9 +34,11 @@ it('Has a gameboard', () => {
   }];
 
   it('Game Works', () => {
-    render(<App deck={deck} demo />);
+    render(<App data={deck} demo />);
     const cards = screen.getAllByRole('button');
+    expect(screen.getByText(/Current Score: 0/)).toBeInTheDocument();
     fireEvent.click(cards[0]);
+    expect(screen.getByText(/Current Score: 1/)).toBeInTheDocument();
     fireEvent.click(cards[1]);
     expect(screen.getByText(/Current Score: 2/)).toBeInTheDocument();
     // repeated card, game over
