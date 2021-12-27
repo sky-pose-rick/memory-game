@@ -1,5 +1,7 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import {
+  render, screen, fireEvent, within,
+} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Gameboard from './Gameboard';
 
@@ -38,10 +40,18 @@ describe('Gameboard with cards', () => {
   });
 
   it('Cards are shuffled between clicks', () => {
-    const mockOrder = [2, 0, 1];
-    expect(screen.getAllByRole('listitem')[0].value).toBe(0);
-    rerender(<Gameboard deck={deck} order={mockOrder} />);
-    expect(screen.getAllByRole('listitem')[0].value).toBe(2);
+    const mockRandomizer = jest.fn((deck) => [2, 0, 1]);
+    const beforeElem = screen.getAllByRole('listitem')[0];
+    expect(within(beforeElem).getByText(/zebra/)).toBeInTheDocument();
+    rerender(<Gameboard
+      deck={deck}
+      randomizer={mockRandomizer}
+      onFirst={mockFirst}
+      onRepeat={mockRepeat}
+    />);
+    fireEvent.click(screen.getByText(/frog/));
+    const afterElem = screen.getAllByRole('listitem')[0];
+    expect(within(afterElem).getByText(/frog/)).toBeInTheDocument();
   });
 
   it('Cards can be clicked', () => {

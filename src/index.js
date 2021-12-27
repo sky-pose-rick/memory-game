@@ -18,6 +18,6 @@ const deck = [{
 }];
 
 ReactDOM.render(
-  <App data={deck} demo />,
+  <App data={deck} />,
   document.getElementById('root'),
 );

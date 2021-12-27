@@ -7,7 +7,7 @@ import Gameboard from './Gameboard';
 
 function App(props) {
   let { data } = props;
-  // const { demo } = props;
+  const { demo } = props;
   if (!data) { data = []; }
 
   const [deck, setDeck] = useState([]);
@@ -20,6 +20,19 @@ function App(props) {
   function resetGame() {
     setScore(0);
   }
+
+  // fisher yates shuffle
+  const shuffle = (elems) => {
+    const array = elems.map((value, index) => index);
+    for (let i = array.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+
+    return array;
+  };
 
   // create the deck at the start
   useEffect(() => {
@@ -36,7 +49,12 @@ function App(props) {
     <div className="App">
       <h1>4-Legged Animals Memory Game</h1>
       <Scoreboard score={score} />
-      <Gameboard deck={deck} onFirst={() => increaseScore()} onRepeat={() => resetGame()} />
+      <Gameboard
+        deck={deck}
+        randomizer={demo ? false : shuffle}
+        onFirst={() => increaseScore()}
+        onRepeat={() => resetGame()}
+      />
     </div>
   );
 }

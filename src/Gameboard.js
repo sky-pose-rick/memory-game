@@ -3,17 +3,19 @@ import React, { useState, useEffect } from 'react';
 
 import Card from './Card';
 
-function defaultOrder(deck) {
+function defaultRandomizer(deck) {
   return deck.map((value, index) => index);
 }
 
 function Gameboard(props) {
-  let { deck, order } = props;
+  let { deck, randomizer } = props;
   const { onFirst, onRepeat } = props;
   if (!deck) { deck = []; }
-  if (!order) { order = defaultOrder(deck); }
+  if (!randomizer) { randomizer = defaultRandomizer; }
+  console.log(randomizer);
 
   const [clicks, setClicks] = useState([]);
+  const [order, setOrder] = useState([]);
 
   function resetCounter() {
     const clickArray = deck.map(() => 0);
@@ -23,6 +25,11 @@ function Gameboard(props) {
   useEffect(() => {
     resetCounter();
   }, [deck.length]);
+
+  useEffect(() => {
+    const newOrder = randomizer(deck);
+    setOrder(newOrder);
+  }, [clicks]);
 
   function makeOnClick(index) {
     if (clicks[index] === 0) {
@@ -44,12 +51,12 @@ function Gameboard(props) {
     <div className="Gameboard">
       <ol style={{ listStyleType: 'none' }}>
         {
-          deck.map((value, index) => {
-            const rank = order[index];
-            const onClick = makeOnClick(index);
+          order.map((rank) => {
+            const card = deck[rank];
+            const onClick = makeOnClick(rank);
             return (
-              <li value={rank} key={value.id}>
-                <Card text={value.text} src={value.src} alt={value.alt} onClick={onClick} />
+              <li value={rank} key={card.id}>
+                <Card text={card.text} src={card.src} alt={card.alt} onClick={onClick} />
               </li>
             );
           })

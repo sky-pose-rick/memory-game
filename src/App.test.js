@@ -4,17 +4,17 @@ import '@testing-library/jest-dom';
 import App from './App';
 
 it('App renders', () => {
-  render(<App />);
+  render(<App demo />);
   expect(screen.getByText(/4-Legged/)).toBeInTheDocument();
 });
 
 it('Has a scorboard', () => {
-  render(<App />);
+  render(<App demo />);
   expect(screen.getByText(/Current Score: 0/)).toBeInTheDocument();
 });
 
 it('Has a gameboard', () => {
-  render(<App />);
+  render(<App demo />);
   expect(screen.getByRole('list')).toBeInTheDocument();
 });
 
