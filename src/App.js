@@ -40,6 +40,7 @@ function App(props) {
 
     setDeck(data.map((value, index) => {
       const card = { ...value };
+      card.src = `/img/${card.src}`;
       card.id = `card-${index}`;
       return card;
     }));
