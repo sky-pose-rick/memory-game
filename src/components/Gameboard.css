@@ -1,0 +1,8 @@
+.Gameboard ul {
+	list-style-type: none;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: 10px;
+	padding-left: 0px;
+	margin: 10px;
+}

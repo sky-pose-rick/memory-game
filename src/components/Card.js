@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
+import './Card.css';
+
 function Card(props) {
   const {
     text, src, alt, onClick,

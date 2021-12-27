@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 
+import './Gameboard.css';
+
 import Card from './Card';
 
 function defaultRandomizer(deck) {
@@ -48,19 +50,19 @@ function Gameboard(props) {
 
   return (
     <div className="Gameboard">
-      <ol style={{ listStyleType: 'none' }}>
+      <ul>
         {
           order.map((rank) => {
             const card = deck[rank];
             const onClick = makeOnClick(rank);
             return (
-              <li value={rank} key={card.id}>
+              <li key={card.id}>
                 <Card text={card.text} src={card.src} alt={card.alt} onClick={onClick} />
               </li>
             );
           })
         }
-      </ol>
+      </ul>
     </div>
   );
 }
