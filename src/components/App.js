@@ -40,7 +40,7 @@ function App(props) {
 
     setDeck(data.map((value, index) => {
       const card = { ...value };
-      card.src = `/memory-game/img/${card.src}`;
+      card.src = `./memory-game/img/${card.src}`;
       card.id = `card-${index}`;
       return card;
     }));
