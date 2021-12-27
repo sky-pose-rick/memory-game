@@ -1,23 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+
+import cardData from './cards.json';
 import App from './App';
 
-const deck = [{
-  src: 'zebra.png',
-  text: 'zebra',
-  alt: 'zebra',
-}, {
-  src: 'bunny.png',
-  text: 'bunny',
-  alt: 'bunny',
-}, {
-  src: 'frog.png',
-  text: 'frog',
-  alt: 'frog',
-}];
-
 ReactDOM.render(
-  <App data={deck} />,
+  <App data={cardData.body} />,
   document.getElementById('root'),
 );

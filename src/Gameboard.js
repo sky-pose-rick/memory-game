@@ -12,7 +12,6 @@ function Gameboard(props) {
   const { onFirst, onRepeat } = props;
   if (!deck) { deck = []; }
   if (!randomizer) { randomizer = defaultRandomizer; }
-  console.log(randomizer);
 
   const [clicks, setClicks] = useState([]);
   const [order, setOrder] = useState([]);
